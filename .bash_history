@@ -87,13 +87,14 @@ python3 generate_p_e_m.py
 #https://github.com/informagi/REL/blob/master/tutorials/deploy_REL_new_Wiki/04_02_training_your_own_embeddings.md
 cd REL/scripts/w2v/
 cat preprocess.sh | tr -d '\r' > preprocess2.sh
-joe preprocess2.sh 
 chmod +x preprocess2.sh 
 cd ~/rel/wiki_latest/basic_data/
 mv wiki_corpus.xml.bz2 enwiki-pages-articles.xml.bz2
 chmod +w enwiki-pages-articles.xml.bz2 && chmod +x enwiki-pages-articles.xml.bz2 
 cd ~/rel/REL/scripts/w2v
-#one line from preprocess2.sh:
+#commented out 1st command with joe
+joe preprocess2.sh 
+#that command line from preprocess2.sh manually
 wikipedia2vec build-dump-db /root/rel/wiki_latest/basic_data/ wiki_corpus.xml.bz2
 #rest
 nohup ./preprocess2.sh &
@@ -107,6 +108,7 @@ nohup /root/.local/bin/wikipedia2vec save-text --out-format word2vec wikipedia2v
 #https://github.com/informagi/REL/blob/master/tutorials/deploy_REL_new_Wiki/04_03_generating_training_test_files.md
 cd ~/rel
 grep -r -i  --include \*.py 'emb.load_word2emb' .
+#i think i didn't edit anything here!
 joe ./REL/REL/db/generic.py
 
 #move this to initial setup above
@@ -132,6 +134,7 @@ mv "Clara_NordstrФm" "Clara_Nordström"
 mv "Hittin__the_Trail_for_Hallelujah_Land" "Hittin'_the_Trail_for_Hallelujah_Land"
 mv JosВ_Evangelista "José_Evangelista"
 mv Putin_s_rynda "Putin's_rynda"
+#commenced out #"wned-clueweb",
 joe /usr/local/lib/python3.6/dist-packages/REL/training_datasets.py
 rm -rf /usr/local/lib/python3.6/dist-packages/REL/__pycache__
 #move above this segment
